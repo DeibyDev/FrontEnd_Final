@@ -1,0 +1,111 @@
+<app-header></app-header>
+<p-toast></p-toast>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-5 zoomInDown video">
+        
+      <video autoplay loop  src="/assets/IntroMarvel.mp4#t=1,20" style=" border-radius: 120px 20px 120px 20px;" width="800" height="480"></video>
+    </div>
+
+ 
+    <div class="col-7">
+        <br>
+        <br>
+        <br>
+        
+      <div class="container">   
+        <div class="card text-center scale-in-ver-top">
+            <div class="card-header">
+               <B>LOGIN</B> <i class="pi pi-user" style="font-size: 1rem;margin-left: 10px;"></i>          
+                <p-progressSpinner *ngIf="mostrar" [style]="{width: '20', height: '20px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>            
+            </div>
+             
+            <div class="card-body" style="margin: 20px;">
+                <form [formGroup]="form">
+                    <span class="p-float-label" style="margin: 20px;">
+                        <input 
+                            id="float-input" 
+                            type="text" 
+                            formControlName="email"
+                            pInputText> 
+                        <label for="float-input">Correo</label>
+                    </span>                       
+    
+                    
+                    <span class="p-float-label" style="margin: 20px;margin-top: 30px;">
+                        
+                        <input 
+                            id="float-input" 
+                            type="password" 
+                            formControlName="password"
+                            pInputText > 
+                        <label for="float-input">Contraseña</label>
+                    </span>
+        
+                               
+                    <button [disabled]="form.invalid" (click)="ingresar()" pButton pRipple type="button" label="Iniciar" class="p-button-outlined p-button-secondary" style="margin-bottom: 10px;"></button>                        
+                    
+                    <br>
+                       
+                    <button type="button" (click)="ingresarGoogle()" pButton pRipple label="Continuar con Google" class="p-button-danger mb-2"><i class="pi pi-google" style="margin-right: 5px;"></i></button>    
+                    
+                    
+                         
+                     
+                    <br>              
+                    <p>Aun no tienes cuenta? <a href="/register-user" data-bs-target="#exampleModal">Registrate</a></p>   
+                    <button pButton (click)="showModalDialog()" pRipple type="button" label="¿Olvidaste la Contraseña?" class="p-button-raised p-button-warning p-button-text"></button>
+                   
+                   
+         
+                </form>           
+               
+            </div>
+            
+            <div>
+                
+            </div>        
+        </div>    
+        
+    
+    </div>
+    </div>    
+  
+ </div> 
+</div>
+
+<div class="text-center " style="background-color: #2A358C; margin-top: 140px;" >
+  <img src="https://ik.imagekit.io/lvh0tltbeph/SofkaU/made-with-by-sofkau_Iaa97UR1ek.png?ik-sdk-version=javascript-1.4.3&updatedAt=1645794724874" alt="" width="400px">
+  </div>
+
+
+
+<p-dialog header="Recuperar Contraseña" [(visible)]="displayModal" [modal]="true" [style]="{width: '20vw'}"
+    [draggable]="false" [resizable]="false">
+    <p-progressSpinner *ngIf="mostrar2" [style]="{width: '20', height: '20px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    <p>Llegará un email si tu correo se encuentra registrado</p>
+    <form [formGroup]="form2">
+        <div class="col-12 md:col-4">
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                <input formControlName="email"  type="text" pInputText placeholder="Ejemplo01@gmail.com">         
+            </div>
+        </div>
+        <div class="centrar">
+            <button [disabled]="form2.invalid" (click)="recuperarEmail()" pButton pRipple type="button" label="Enviar" class="p-button-outlined p-button-secondary" style="margin-top: 30px;"></button>
+
+        </div>
+    </form>
+
+
+   
+</p-dialog> 
+
+
+
+
+

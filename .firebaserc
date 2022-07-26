@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "challenge-full-stack-game": {
+      "hosting": {
+        "challenge-full-stack-game": [
+          "challenge-full-stack-game"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "challenge-full-stack-game"
+  }
+}

@@ -1,0 +1,79 @@
+<app-header></app-header>
+<p-toast></p-toast>
+<div class="container">
+    <p-tabView>
+        <p-tabPanel header="Salas Disponibles" leftIcon="pi pi-sign-in" tooltip="Jugar Ahora">
+            <p-table styleClass="p-datatable-gridlines" [value]="cards"  responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    Salas Disponibles
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>IdSala</th>
+                        <th>JugadorID</th>
+                        <th>Alias</th>
+                        <th>Acciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-listarSala>
+                    <tr>
+                        <td>{{listarSala.juegoId}}</td>
+                        <td>{{listarSala.jugadorId}}</td>
+                        <td>{{listarSala.alias}}</td>
+                        <td>
+                            <button pButton pRipple type="button" label="Disponible" (click)="agregarJugadorSala(listarSala.juegoId,listarSala.jugadorId,listarSala.alias)" class="p-button-raised p-button-success"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    Footer
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+        <p-tabPanel header="Crear Sala" leftIcon="pi pi-id-card" tooltip="Juega con tus propios amigos, ¡anímate!">
+            <div class="container">
+                <form [formGroup]="form">
+                <div class="row">
+
+
+                    <!-- TODO: Sala -->
+            <div class="col-4">
+                <label for="exampleFormControlInput1"  class="form-label">Id de la sala</label>
+
+                <input type="email" class="form-control" readonly="readonly"  formControlName="id" id="exampleFormControlInput1" value="22123SSASCCFD#4">
+              </div>
+              </div>
+              <br>
+              <div class="row">
+            <div class="col-6">
+                <label for="exampleFormControlInput1"  class="form-label">Nombre de la Sala</label>
+                <input type="email" class="form-control" formControlName="sala" id="exampleFormControlInput1" placeholder="Apostando las polas">
+              </div>
+              <div class="col-3">
+                <label for="exampleFormControlInput1"  class="form-label">Estado de la Sala</label>
+                <select class="form-select" formControlName="estado"  aria-label="Default select example">                   
+                    <option value="Activa">Activa</option>
+                    <option value="Inactiva">Inactiva</option>
+                    
+                  </select>
+              </div>
+              <div class="col-3">
+                <label for="exampleFormControlInput1"  class="form-label">Numero de Jugadores</label>
+                <input type="number" class="form-control" formControlName="jugadores" id="exampleFormControlInput1" placeholder="6">
+              </div>
+              <br>
+             
+                </div>
+                <br>
+            </form>
+                <div class="row">
+                    <div class="col-12 text-center">
+                      <button  pButton pRipple type="button" label="Crear Sala" (click)="validar()" class="p-button-outlined p-button-secondary" style="margin-bottom: 10px;"></button>   
+                    </div>
+                  </div>
+              </div>
+
+
+        </p-tabPanel>       
+    </p-tabView>
+    </div>

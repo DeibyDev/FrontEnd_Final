@@ -1,0 +1,20 @@
+<app-header></app-header>
+<mat-divider></mat-divider>
+<br>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="20px">
+    <div fxFlex="20" fxFlex.lg="15" fxFlex.sm="30" *ngFor="let card of cards">
+        <mat-card style="margin-top: 20px;">
+            <mat-card-header>
+                <mat-card-title>{{ card.nombre }}</mat-card-title>
+                <mat-card-subtitle> Poder: {{ card.poder }}</mat-card-subtitle>
+            </mat-card-header>
+        
+            <img mat-card-image src="{{ card.imagen }}">
+        
+            <mat-card-content>
+                <p>{{ card.descipcion }}</p>
+                <p>{{ card.caracteristica }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

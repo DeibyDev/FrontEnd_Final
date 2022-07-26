@@ -1,0 +1,53 @@
+<!-- TODO: -->
+<br>
+
+
+
+<p-carousel [value]="cardsCarousel" styleClass="custom-carousel" [numVisible]="5" [numScroll]="4" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="header">        
+    </ng-template>
+    <ng-template let-product pTemplate="item">
+        <p-card header="{{product.title}}" subheader="" [style]="{width: '300px'}" styleClass="p-card-shadow;">
+            <p style="font-weight: bold;">Poder: {{product.poder}}</p>
+            <ng-template pTemplate="header">
+                <img alt="Card" src="{{product.thumbImage}}">
+            </ng-template>
+            
+            <div class="module line-clamp">               
+                <div class="text">{{product.descipcion}}</div>
+              </div>           
+        </p-card>
+        
+    </ng-template>
+</p-carousel>
+
+<div class="wrap">
+
+    <button (click)="showPositionDialog('bottom')" class="button">Jugar Ahora</button>
+  </div>
+
+<p-dialog header="Jugar Ahora" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    <p>
+        Juego de cartas basado en los Superhéroes de Marvel y
+        los acontecimientos más relevantes ocurridos durante las diferentes sagas de comics.
+    </p>
+    
+    <p>
+        Cada jugador cuenta con un mazo de cartas repartidas al azar, 
+        cada una de estas tiene un puntaje de poder asignado. Los jugadores tienen
+        <b>máximo 60 segundos</b> para elegir una carta y apostarla en el tablero, luego de
+        este tiempo las cartas serán reveladas y el jugador con la carta de poder
+        mayor se quedará con las cartas de los demás oponentes. 
+    </p>
+
+    <p>
+        El juego finaliza cuando uno de los jugadores logre quedarse con <b>todas las cartas</b>.
+    </p>
+
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="sala()" label="Continuar.." styleClass="p-button-text"></p-button>
+          
+        </ng-template>
+</p-dialog>
+

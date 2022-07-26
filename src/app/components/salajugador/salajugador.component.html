@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-8" style="text-align: center">
+            <p-table styleClass="p-datatable-gridlines" [value]="jugadores"  responsiveLayout="scroll">
+                <ng-template pTemplate="caption">
+                    Salas id
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>IdSala</th>
+                        <th>JugadorID</th>
+                        <th>Alias</th>
+                        <th>Acciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-listarSala>
+                    <tr>
+                        <td>{{listarSala.juegoId}}</td>
+                        <td>{{listarSala.jugadorId}}</td>
+                        <td>{{listarSala.alias}}</td>
+                        <td>
+                            <button pButton pRipple type="button" label="Entrar a la Sala"  (click)="enviarSala(listarSala.juegoId,listarSala.jugadorId)" class="p-button-raised p-button-success"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    Footer
+                </ng-template>
+            </p-table>
+            <br>
+            <button pButton pRipple type="button"  label="Crear Juego"  (click)="iniciarJuego()" class="p-button-raised p-button-success"></button>
+           
+        </div>
+        <div class="col-4" style="text-align: center">
+           <img src="https://thumbs.gfycat.com/EachDearAustralianfreshwatercrocodile-size_restricted.gif" alt="">
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="text-center " style="background-color: #2A358C; margin-top: 140px;" >
+    <img src="https://ik.imagekit.io/lvh0tltbeph/SofkaU/made-with-by-sofkau_Iaa97UR1ek.png?ik-sdk-version=javascript-1.4.3&updatedAt=1645794724874" alt="" width="400px">
+    </div>
+
+ -->
