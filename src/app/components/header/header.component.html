@@ -1,54 +1,55 @@
-  <nav class="navbar bg-light font">
-    <div class="container-fluid">
-      <div>
-        <a href="/dashboard">
-            <img src="https://i.gifer.com/RBBv.gif" alt="" width="300" height="100" class="imgFondo">
-          </a>
-<!-- <p style="text-align: center">Hola</p> -->
-      </div>
-        
-
-        
-          
-            <a class="navbar-brand text-center" href="/cards">
-              <div>
-                <img src="https://i.pinimg.com/originals/f1/c1/14/f1c11410620753da29714e3203a85ec0.gif" alt="" width="40" height="40" class="d-inline-block align-text-top card">
-              </div>
-              <b><span class="font" style="font-family: 'Poppins', sans-serif;">Cartas</span></b>
-            </a>
-            <div style="text-align: end;">
-              <a class="navbar-brand text-center"   style="text-align: end;"href="/sign-in">
-                <div>
-                  <img src="https://monophy.com/media/P0GMZKMhcY19SWdQhU/monophy.gif" alt="" width="60" height="60" class="d-inline-block align-text-top card">
-                </div>
-                <b><span class="font" style="font-family: 'Poppins', sans-serif;">Jugar</span></b>
-              </a>
-            
-            </div>
-            
-            
-
-          
-
-         
-            
-  
-
-        
-       
-    
-
-        <!-- <button pButton pRipple type="button" class="p-button-outlined p-button-danger" style="text-align: center;"  (click)="cards()"><i class="pi pi-power-off" style="margin-left: 5px;"></i>CARDS</button>   -->
-        
-      <form *ngIf="userLogged|async as user">
-        <button class="btn p-button-secondary" style="margin-right: 10px;" disabled="true">Bienvenido {{user.email}}</button>  
-        <button pButton pRipple type="button" class="p-button-outlined p-button-danger" style="text-align: center;" [disabled]="disabled" (click)="SignOut()"><i class="pi pi-power-off" style="margin-left: 5px;"></i></button>
-      </form>     
-      <button *ngIf="disabled" pButton pRipple type="button" label="Iniciar Sesion" class="p-button-warning" (click)="login()"></button>
-      
-
-     
+<nav class="navbar bg-light font">
+  <div class="container-fluid">
+    <div>
+      <a href="/dashboard">
+        <img src="/assets/marvel-gif.gif" alt="" width="300" height="100" class="imgFondo">
+      </a>
+      <!-- <p style="text-align: center">Hola</p> https://i.gifer.com/RBBv.gif https://monophy.com/media/P0GMZKMhcY19SWdQhU/monophy.gif -->
     </div>
-   
-  </nav>
-  <br>
+    <a class="navbar-brand text-center" href="/cards">
+      <div>
+        <img src="/assets/hero-gif.gif" alt="" width="40"
+          height="40" class="d-inline-block align-text-top card">
+      </div>
+      <b><span class="font" style="font-family: 'Poppins', sans-serif;">Cartas</span></b>
+    </a>
+    <div style="text-align: end;">
+      <a class="navbar-brand text-center" style="text-align: end;" href="/sign-in">
+        <div>
+          <img src="/assets/control.png" alt="" width="60" height="60"
+            class="d-inline-block align-text-top card">
+        </div>
+        <b><span class="font" style="font-family: 'Poppins', sans-serif;">Jugar</span></b>
+      </a>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <button pButton pRipple type="button" class="p-button-outlined p-button-danger" style="text-align: center;"  (click)="cards()"><i class="pi pi-power-off" style="margin-left: 5px;"></i>CARDS</button>   -->
+
+    <form *ngIf="userLogged|async as user">
+      <button class="btn p-button-secondary" style="margin-right: 10px;" disabled="true">Bienvenido
+        {{user.email}}</button>
+      <button pButton pRipple type="button" class="p-button-outlined p-button-danger" style="text-align: center;"
+        [disabled]="disabled" (click)="SignOut()"><i class="pi pi-power-off" style="margin-left: 5px;"></i></button>
+    </form>
+    <button *ngIf="disabled" pButton pRipple type="button" label="Iniciar Sesion" class="p-button-warning"
+      (click)="login()"></button>
+
+
+
+  </div>
+
+</nav>
+<br>

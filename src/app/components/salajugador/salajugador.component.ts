@@ -43,18 +43,11 @@ export class SalajugadorComponent implements OnInit {
     this.habilitarJuego=false;
     this.spinner=false;
     this.userLogged = this.authService.getUserLogged();  
-
-
   }
-
-
-
-
 
   obtenerInformacionSala(id:string){
    this.dataService.getInformacionSala(id).subscribe((res:any)=>
    {
-
     let juegoID =res.juegoId;
     res.jugadores.forEach((elem: { alias: any; jugadorId: any; puntaje: any; }) => {
       let juga: jugador;
@@ -63,33 +56,23 @@ export class SalajugadorComponent implements OnInit {
         jugadorId: elem.jugadorId,
         puntaje: elem.puntaje,
         juegoId:juegoID
-      }
+      };
 
-        this.jugadores.push(juga);
+      this.jugadores.push(juga);
 
-       this.jugadoresFiltrados= this.jugadores.filter((valor, indice) => {
-           this.jugadores.indexOf(valor) === indice;
-       
-        }
-      );
+      this.jugadoresFiltrados = this.jugadores.filter((valor, indice) => {
+        this.jugadores.indexOf(valor) === indice;
+      });
         
-
-
       this.userLogged.subscribe( (x: { email: string; }) => {
         this.habilitarJuego = this.jugadores[0].jugadorId == x?.email;
         this.usuarioLogeado = x.email;
         console.log('jugador id ', this.jugadores[0].jugadorId, 'x ', x?.email);
-        
-        
-        
-      })
+      });
 
     });   
    })
   }
-
-  
-
 
   iniciarJuego(){
     if(this.jugadores.length >= 2){
@@ -101,6 +84,7 @@ export class SalajugadorComponent implements OnInit {
         summary: 'Creando Tablero !',
         detail: 'Uniendo jugadores al tablero',
       });
+
       this.spinner=true;
       
     } else {
@@ -112,8 +96,6 @@ export class SalajugadorComponent implements OnInit {
     }
   }
 
-
-  
   enviarSala(juegoId:string,jugadorId:string){
     this.dataService.setJuegoId(juegoId);
     this.dataService.setJugadorId(jugadorId);
@@ -127,6 +109,7 @@ export class SalajugadorComponent implements OnInit {
       console.log('socket desde salajugadors' , evento);
            
       switch(evento.type){
+
       case 'juego.JugadorCreado' :{
           let juga: jugador;
         juga = {
@@ -134,13 +117,14 @@ export class SalajugadorComponent implements OnInit {
           jugadorId: evento.jugadorId,
           puntaje: 0,
           juegoId:evento.aggregateRootId
-        }
+        };
+
         this.jugadores.forEach((jugador)=>{
           if(!(jugador.jugadorId==juga.jugadorId)){
             this.jugadores.push(juga);  
           }
-        }
-        )
+        });
+
         this.router.navigate(['sala-jugador'])
         .then(() => {
           window.location.reload();
@@ -159,17 +143,7 @@ export class SalajugadorComponent implements OnInit {
      }
 
 
-    }
-
-
-    
-
-      
-      
+    }  
     })
-
-    
-
-    
   }
 }
