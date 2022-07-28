@@ -3,14 +3,14 @@
 
 
 
-<p-carousel [value]="cardsCarousel" styleClass="custom-carousel" [numVisible]="5" [numScroll]="4" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions">
+<p-carousel [value]="cards" styleClass="custom-carousel" [numVisible]="5" [numScroll]="4" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions">
     <ng-template pTemplate="header">        
     </ng-template>
     <ng-template let-product pTemplate="item">
         <p-card header="{{product.title}}" subheader="" [style]="{width: '300px'}" styleClass="p-card-shadow;">
             <p style="font-weight: bold;">Poder: {{product.poder}}</p>
             <ng-template pTemplate="header">
-                <img alt="Card" src="{{product.thumbImage}}">
+                <img alt="Card" src="{{product.imagen}}">
             </ng-template>
             
             <div class="module line-clamp">               

@@ -3,30 +3,34 @@
 <mat-divider></mat-divider>
 <br>
 <div class="container">
-<div class="row">
-  <div class="col-6 scale-up-center " id="tablero">
-    <img mat-card-image src="{{idcarta}}">
+  <div fxLayoutAlign="center">
+    <button mat-button color="warn" style="font-size: 30px;">{{cronometro}}</button>
   </div>
-  <div class="col-6">
-    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="30px">
-      <div fxFlex="35" fxFlex.lg="20" fxFlex.sm="30" *ngFor="let card of cartaJugador">
+  <div class="row" style="margin-top: 1%;">
+    <div class="col-6 scale-up-center " id="tablero">
+      <img mat-card-image src="{{cartaJugada}}">
+    </div>
+    <div class="col-6" fxLayoutAlign="center">
+
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="30px">
+        <div fxFlex="35" fxFlex.lg="20" fxFlex.sm="30" *ngFor="let card of cartasJugador">
           <mat-card style="margin-top: 20px;">
-              <mat-card-header>
-                  <mat-card-title>{{ card.nombre }}</mat-card-title>
-                  <mat-card-subtitle> Poder: {{ card.poder }}</mat-card-subtitle>
-              </mat-card-header>
-          
-              <img mat-card-image src="{{ card.imagen }}">
-              <!-- <input [disabled]="state"> -->
-              <button pButton pRipple type="button" label="Apostar" [disabled]="state" (click)="jugarCarta(card.id, card.imagen)" class="p-button-raised p-button-info"></button>
+            <mat-card-header>
+              <mat-card-title>{{ card.nombre }}</mat-card-title>
+              <mat-card-subtitle> Poder: {{ card.poder }}</mat-card-subtitle>
+            </mat-card-header>
 
-          
+            <img mat-card-image src="{{ card.imagen }}">
+            <!-- <input [disabled]="state"> -->
+            <button pButton pRipple type="button" label="Apostar" [disabled]="deshabilitarApuesta"
+              (click)="jugarCarta(card.id, card.imagen)" class="p-button-raised p-button-info"></button>
+
           </mat-card>
+        </div>
       </div>
-  </div>
+
+    </div>
 
   </div>
-
-</div>
 
 </div>

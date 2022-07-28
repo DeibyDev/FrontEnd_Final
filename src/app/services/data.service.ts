@@ -6,6 +6,7 @@ import { juego } from '../model/juego';
 import { Observable } from 'rxjs';
 import { sala } from '../model/informacionSala';
 import { salaget } from '../model/sala';
+import { JugadorCards } from '../interfaces/jugador-cards';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,18 @@ export class DataService {
 
   private juegoId:string ='';
   private jugadorId:string='';
+
+  estadoJugador: JugadorCards[] = [{
+    jugadorId: '',
+    cartas:[{
+      cartaId: '',
+      habilitada: true,
+      oculta: true,
+      xp: 0
+    }],
+    puntaje: 0,
+    when: ''
+  }];
 
   public setJuegoId (id:string){
     this.juegoId=id;
@@ -80,7 +93,7 @@ export class DataService {
     );
   }
 
-  obtenerCartasJugador(juegoId: string ,jugadorId:string): Observable<any> {
+  obtenerCartasJugador(juegoId: string ,jugadorId:string) {
 
     let parametros={
       'juegoId':juegoId,
@@ -88,7 +101,7 @@ export class DataService {
     };
     let direction = this.url + 'jugador';
 
-    return this.http.post<any>(direction, parametros);
+    return this.http.post<JugadorCards[]>(direction, parametros);
   }
 
   agregarJugadorSala(juegoId: string ,jugadorId:string,alias:string): Observable<any>{
@@ -122,7 +135,7 @@ export class DataService {
     });
   }
 
-  jugarcarta(juegoId: string ,jugadorId:string,cartaId:string): Observable<any>{
+  jugarcarta(juegoId: string ,jugadorId:string,cartaId:string){
 
     let parametros={
       'juegoId':juegoId,

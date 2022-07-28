@@ -50,9 +50,7 @@ import { SalajugadorComponent } from './components/salajugador/salajugador.compo
 import { TableroComponent } from './components/tablero/tablero.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-
-
-
+import { MatCarouselModule } from 'ng-mat-carousel';
 
 
 @NgModule({
@@ -107,6 +105,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     MessagesModule,
     MessageModule,
     ToastModule,
+    MatCarouselModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
     

@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CarouselComponent implements OnInit {
   userLogged = this.authService.getUserLogged();
   cards: Array<Card> = [];
-  cardsCarousel: Array<CardCarousel> = [];
+  cardsCarousel: Array<Card> = [];
   displayPosition: boolean = false;
   position: string = '';
   responsiveOptions;
@@ -43,14 +43,11 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateImages();
-    this.dataService.connectToWebSocket('12345678910').subscribe((x: any) => {
-      console.log(x);
-    });
   }
 
   generateImages() {
-    this.dataService.getCards().subscribe((x) => {
-      let arrayCartas = x.slice(0, 19);
+    this.dataService.getCards().subscribe((res) => {
+      /*let arrayCartas = x.slice(0, 50);
       arrayCartas.forEach((res) => {
         let card: CardCarousel;
         card = {
@@ -64,7 +61,8 @@ export class CarouselComponent implements OnInit {
         };
 
         this.cardsCarousel.push(card);
-      });
+      });*/
+      this.cards = res;
     });
   }
 
