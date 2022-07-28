@@ -48,6 +48,8 @@ import {ToastModule} from 'primeng/toast';
 import { SalaComponent } from './components/sala/sala.component';
 import { SalajugadorComponent } from './components/salajugador/salajugador.component';
 import { TableroComponent } from './components/tablero/tablero.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 
@@ -104,7 +106,9 @@ import { TableroComponent } from './components/tablero/tablero.component';
     DividerModule,
     MessagesModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
     
   ],
   providers: [AuthService],

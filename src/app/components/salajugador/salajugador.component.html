@@ -1,4 +1,5 @@
 <app-header></app-header>
+<p-toast></p-toast>
 <div class="container">
     <div class="row">
         <div class="col-8" style="text-align: center">
@@ -20,7 +21,7 @@
                         <td>{{listarSala.jugadorId}}</td>
                         <td>{{listarSala.alias}}</td>
                         <td>
-                            <button pButton pRipple type="button" label="Entrar a la Sala"  (click)="enviarSala(listarSala.juegoId,listarSala.jugadorId)" class="p-button-raised p-button-success"></button>
+                            <button pButton pRipple [disabled]="habilitarBoton" type="button" label="Entrar a la Sala"  (click)="enviarSala(listarSala.juegoId,listarSala.jugadorId)" class="p-button-raised p-button-success"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -29,7 +30,7 @@
                 </ng-template>
             </p-table>
             <br>
-            <button pButton pRipple type="button"  label="Crear Juego"  (click)="iniciarJuego()" class="p-button-raised p-button-success"></button>
+            <button pButton pRipple *ngIf="habilitarJuego" type="button"  label="Crear Juego"  (click)="iniciarJuego()" class="p-button-raised p-button-success"></button>
            
         </div>
         <div class="col-4" style="text-align: center">

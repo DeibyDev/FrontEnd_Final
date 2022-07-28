@@ -33,29 +33,29 @@ export class DataService {
   //agregar sets
 
   sendPlayers(gameData: any) {
-    return this.http.post<any>('http://localhost:8080/crearJuego', gameData);
+    return this.http.post<any>('http://localhost:8081/crearJuego', gameData);
   }
 
   startGame(id: string) {
     const gameId = { juegoId: id };
-    return this.http.post<any>('http://localhost:8080/iniciarJuego', gameId);
+    return this.http.post<any>('http://localhost:8081/iniciarJuego', gameId);
   } //https://cargames.herokuapp.com
 
   getCards() {
-    return this.http.get<Card[]>('http://localhost:8080/api/v1/carta');
+    return this.http.get<Card[]>('http://localhost:8081/api/v1/carta');
     // return this.http.get<Card[]>('/api/v1/carta');
   }
 
   connectToWebSocket(juegoId: string) {
     const webSocketSubject: WebSocketSubject<any> = webSocket(
-      `ws://192.168.0.7:8080/retrieve/${juegoId}`
+      `ws://localhost:8081/retrieve/${juegoId}`
     );
     return webSocketSubject.asObservable();
   }
 
   // TODO: Nuevo
 
-  private url: string = 'http://192.168.0.7:8080/api/v1/juego/';
+  private url: string = 'http://localhost:8081/api/v1/juego/';
 
   crearjuego(id: juego): Observable<any> {
     let direction = this.url + 'crearjuego';
@@ -71,12 +71,12 @@ export class DataService {
 
   getInformacionSala(id: string): Observable<any> {
     let direction = this.url;
-    return this.http.get(`http://192.168.0.7:8080/api/v1/juego/${id}`);
+    return this.http.get(`http://localhost:8081/api/v1/juego/${id}`);
   }
 
   getIniciarJuego(id: string): Observable<any> {
     return this.http.get(
-      `http://192.168.0.7:8080/api/v1/juego/iniciarjuego/${id}`
+      `http://localhost:8081/api/v1/juego/iniciarjuego/${id}`
     );
   }
 
@@ -105,7 +105,7 @@ export class DataService {
   }
 
   saveQuestion(question: salaget): Observable<any> {
-    let direction = 'http://192.168.0.7:8080/api/v1/juego/' + 'agregarjugador';
+    let direction = 'http://localhost:8081/api/v1/juego/' + 'agregarjugador';
 
 
     console.log('*******Save Question******');
