@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <p-toast></p-toast>
 <div class="container">
     <div class="row">
@@ -12,7 +13,7 @@
                         <th>IdSala</th>
                         <th>JugadorID</th>
                         <th>Alias</th>
-                        <th>Acciones</th>
+                        
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-listarSala>
@@ -20,9 +21,7 @@
                         <td>{{listarSala.juegoId}}</td>
                         <td>{{listarSala.jugadorId}}</td>
                         <td>{{listarSala.alias}}</td>
-                        <td>
-                            <button pButton pRipple [disabled]="habilitarBoton" type="button" label="Entrar a la Sala"  (click)="enviarSala(listarSala.juegoId,listarSala.jugadorId)" class="p-button-raised p-button-success"></button>
-                        </td>
+                        
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="summary">
@@ -30,13 +29,16 @@
                 </ng-template>
             </p-table>
             <br>
-            <button pButton pRipple *ngIf="habilitarJuego" type="button"  label="Crear Juego"  (click)="iniciarJuego()" class="p-button-raised p-button-success"></button>
+            <button pButton pRipple *ngIf="habilitarJuego" type="button"  label="Iniciar Juego"  (click)="iniciarJuego()" class="p-button-raised p-button-success"></button>
            
         </div>
         <div class="col-4" style="text-align: center">
            <img src="https://thumbs.gfycat.com/EachDearAustralianfreshwatercrocodile-size_restricted.gif" alt="">
         </div>
     </div>
+</div>
+<div class="progress-spinner" *ngIf="spinner">
+    <p-progressSpinner></p-progressSpinner>
 </div>
 
 
