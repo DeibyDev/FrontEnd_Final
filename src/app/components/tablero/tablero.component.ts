@@ -269,6 +269,7 @@ export class TableroComponent implements OnInit {
         case 'juego.TiempoRestablecido': {
           this.cronometro = 60;
           this.cartaJugada = '';
+          this.apuestas = [];
           break;
         }
 
