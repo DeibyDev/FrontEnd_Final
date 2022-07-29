@@ -7,35 +7,40 @@
     <button mat-button color="warn" style="font-size: 40px;" class="reloj">{{cronometro}}</button>
   </div>
   <div class="row tablero" style="position: relative; left: 0; top: 0;">
-    <div class="col-2 scale-up-center">
-      <img mat-card-image src="{{cartaJugada}}" width="150px">
+      <div class="col-2 scale-up-center">
+        <img mat-card-image src="{{cartaJugada}}" width="150px" >
     </div>
     <br>
-  </div>
+</div>
 
-  <div class="col-12">
+<div class="col-12" >
     <p-carousel [value]="cartasJugador" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1">
       <ng-template pTemplate="header"> </ng-template>
-      <ng-template let-card pTemplate="item">
+      <ng-template let-card pTemplate="item">      
 
         <div class="wrapper">
           <div class="clash-card barbarian">
             <div class="clash-card_image clash-card_image--barbarian">
-              <img src="{{ card.imagen }}" alt="barbarian" />
+              <img src="{{ card.imagen }}" alt="barbarian"  />
             </div>
             <div class="clash-card_level clash-card_level--barbarian">Poder: {{ card.poder }}</div>
-            <div class="clash-card__unit-name">{{ card.nombre }}</div>
+            <div class="clash-card__unit-name">{{ card.nombre }}</div>   
             <div class="clash-card_unit-stats clash-card_unit-stats--barbarian clearfix text-center">
               <div class="one-third">
                 <div class="text-center">
-                  <button pButton pRipple type="button" label="Apostar" [disabled]="deshabilitarApuesta"
-                    (click)="jugarCarta(card.id, card.imagen)" class=" btn-apostar"></button>
-                </div>
+           <button pButton pRipple type="button" label="Apostar" [disabled]="deshabilitarApuesta"
+           (click)="jugarCarta(card.id, card.imagen)"
+                    class=" btn-apostar"></button>
+                  </div>
               </div>
-            </div>
+            </div> 
           </div> <!-- end clash-card barbarian-->
         </div> <!-- end wrapper -->
-      </ng-template>
-    </p-carousel>
-  </div>
+  
+    
+
+    
+  </ng-template>
+</p-carousel>
 </div>
+  </div>

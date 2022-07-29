@@ -31,9 +31,42 @@ export class HistoryComponent implements OnInit {
   ngOnInit(): void {
     this.juegoId = localStorage.getItem('juegoId');
     console.log('Juego Id:', this.juegoId);
-    
-    this.conexionWebSocket();
     this.consultarEstadoDeJuego(this.juegoId);
+    //this.llenarJugadores();
+    this.conexionWebSocket();
+    
+  }
+
+  llenarJugadores(){
+
+    let jugadorSimple: JugadorSimple;
+      jugadorSimple = {
+        jugadorId: 'Pablo',
+        alias: 'Sala 1',
+        puntaje: 5
+      }
+
+    let jugadorSimple2: JugadorSimple;
+      jugadorSimple2 = {
+        jugadorId: 'Pablo',
+        alias: 'Sala 1',
+        puntaje: 4
+      }
+
+    let jugadorSimple3: JugadorSimple;
+      jugadorSimple3 = {
+        jugadorId: 'Pablo',
+        alias: 'Sala 1',
+        puntaje: 0
+      }
+
+      this.jugadores.push(jugadorSimple3);
+      this.jugadores.push(jugadorSimple2);
+      this.jugadores.push(jugadorSimple);
+
+
+      this.jugadores.sort((a,b) => b.puntaje - a.puntaje);
+
   }
 
   consultarEstadoDeJuego(idJuego: string){
@@ -46,16 +79,11 @@ export class HistoryComponent implements OnInit {
         alias: jugador.alias,
         puntaje: jugador.puntaje
       }
-
       this.jugadores.push(jugadorSimple);
-
     });
-    
-    console.log('RESPUESTA', res);
-    
    });
 
-   //this.jugadores.sort((a,b) => b.puntaje - a.puntaje);
+   this.jugadores.sort((a,b) => b.puntaje - a.puntaje);
    console.log('jugadores: ', this.jugadores);
    ;
   }
