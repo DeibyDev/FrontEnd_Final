@@ -133,6 +133,7 @@ export class TableroComponent implements OnInit {
       if(user?.email === this.dataService.getJugadorId()){
         this.cartaJugada = cartaApostada;
         this.cartaJugadaTemp = this.cartaJugada;
+        this.cartaJugada = this.cartaEscondida;
       }
     });
 
@@ -155,7 +156,6 @@ export class TableroComponent implements OnInit {
     this.cartasJugador = this.cartasJugador.filter( carta => carta.id !== idCarta);
     
     this.deshabilitarApuesta = true;
-    this.cartaJugada = this.cartaEscondida;
   }
 
   conexionWebSocket(){
@@ -247,6 +247,22 @@ export class TableroComponent implements OnInit {
     });
   }
 
+  empate(event: any){
+    event.jugadorIds.forEach( (id: string) => {
+      if(id === this.dataService.getJugadorId()){
+        this.deshabilitarApuesta = false;
+      } else {
+        this.deshabilitarApuesta = true;
+      }
+
+      this.messageService.add({
+        severity: 'warning',
+        summary: 'Empate',
+        detail: 'Jugador ' + id + ' empatado',
+      });
+    });
+  }
+
   conexionWebSocket2(){
     this.dataService.connectToWebSocket(this.dataService.getJuegoId()).subscribe((event)=>{
       switch(event.type){
@@ -266,6 +282,7 @@ export class TableroComponent implements OnInit {
 
         case 'juego.CartaJugada': {
           //this.quitarCartaAlAzar(event);
+          this.cartaJugada = this.cartaEscondida;
           break;
         }
 
@@ -296,8 +313,8 @@ export class TableroComponent implements OnInit {
         }
 
         case 'juego.CartasApostadasMostradas': {
-          //this.mostrarCarta();
-          this.cartaJugada = this.cartaJugadaTemp;
+          this.mostrarCarta();
+          //this.cartaJugada = this.cartaJugadaTemp;
           break;
         }
 
@@ -308,13 +325,7 @@ export class TableroComponent implements OnInit {
         }
 
         case 'juego.RondaDeDesempateCreada': {
-          event.jugadorIds.subscribe( (id: string) => {
-            if(id === this.dataService.getJugadorId()){
-              this.deshabilitarApuesta = false;
-            } else {
-              this.deshabilitarApuesta = true;
-            }
-          });
+          this.empate(event);
           break;
         }
 
