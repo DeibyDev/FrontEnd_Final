@@ -4,17 +4,13 @@ import { DataService } from 'src/app/services/data.service';
 import { ICard } from 'src/app/interfaces/card';
 import { MessageService, Message } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
-import { find } from 'rxjs';
-import { salaget } from 'src/app/model/sala';
 import { JugadorCards } from 'src/app/interfaces/jugador-cards';
-import { CardSimple } from 'src/app/interfaces/card-simple';
 import { CartaJugador } from 'src/app/interfaces/carta-jugador';
-import { Card } from 'primeng/card';
 
 @Component({
   selector: 'app-tablero',
   templateUrl: './tablero.component.html',
-  styleUrls: ['./tablero.component.css'],
+  styleUrls: ['./tablero.component.scss'],
   providers: [MessageService],
 })
 export class TableroComponent implements OnInit {

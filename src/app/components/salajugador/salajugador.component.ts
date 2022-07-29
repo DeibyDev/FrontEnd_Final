@@ -27,6 +27,9 @@ export class SalajugadorComponent implements OnInit {
   userLogged: any;
   juegoId:any ='';
 
+  sesionLogeadaFirebase:any ='';
+  sesionSala:string='';
+
   constructor(private dataService: DataService,
     private router: Router,
     private messageService: MessageService,
@@ -34,6 +37,11 @@ export class SalajugadorComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.authService.getUserLogged().subscribe((prop)=>{
+      console.log(prop?.email)
+      this.sesionLogeadaFirebase =prop?.email;
+    });
  
     this.juegoId= localStorage.getItem('id');
     this.obtenerInformacionSala(this.juegoId);
@@ -65,7 +73,8 @@ export class SalajugadorComponent implements OnInit {
       });
         
       this.userLogged.subscribe( (x: { email: string; }) => {
-        this.habilitarJuego = this.jugadores[0].jugadorId == x?.email;
+        //this.habilitarJuego = this.jugadores[0].jugadorId == x?.email;
+        this.userLogged=this.jugadores[0].jugadorId;
         this.usuarioLogeado = x.email;
         console.log('jugador id ', this.jugadores[0].jugadorId, 'x ', x?.email);
       });

@@ -20,6 +20,8 @@ export class SalaComponent implements OnInit {
 
   email: any;
 
+  bloquerBoton:boolean =false;
+
   public form: FormGroup = this.formBuilder.group({
     id: ['', []],
     sala: ['', [Validators.required, Validators.maxLength(50)]],
@@ -68,6 +70,7 @@ export class SalaComponent implements OnInit {
 
     this.idAleatorio();
     this.listarSala();
+    this.bloquerBoton=false;
   }
 
   validar() {
@@ -79,10 +82,9 @@ export class SalaComponent implements OnInit {
         this.dato.alias = this.form.get('sala')?.value;
         this.dato.jugadorId = value?.email;
         this.dato.juegoId = this.form.get('id')?.value;
-        console.log(this.dato);
        
         this.DataService.crearjuego(this.dato).subscribe((res) => {
-          console.log(res);
+          this.bloquerBoton=true;
 
           if (res) {
             this.messageService.add({
