@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CardsComponent } from './components/cards/cards.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SalaComponent } from './components/sala/sala.component';
 import { SalajugadorComponent } from './components/salajugador/salajugador.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'sala', component: SalaComponent },
   { path: 'sala-jugador', component: SalajugadorComponent },
   { path: 'tablero', component: TableroComponent },
+  { path: 'history', component: HistoryComponent },
   {path: '**', pathMatch: 'full', redirectTo:'dashboard'}
 ];
 

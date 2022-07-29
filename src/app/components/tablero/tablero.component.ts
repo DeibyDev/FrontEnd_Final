@@ -24,7 +24,6 @@ export class TableroComponent implements OnInit {
   cards: Array<Card> = [];
   cartasJugador: Array<Card> = [];
   cartaPorJugador : Array<any> = [];
-  state = false;
   cartaJugada: string = '';
   cartaJugadaTemp: string = '';
   cartaEscondida: string = '';
@@ -47,7 +46,7 @@ export class TableroComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateCards();
-    this.conexionWebSocket2();
+    this.conexionWebSocket();
     this.cronometro = 60;
     this.deshabilitarApuesta = false;
     this.cartaEscondida = '/assets/carta-volteada.png'
@@ -60,24 +59,7 @@ export class TableroComponent implements OnInit {
 
   generateCards() {
     this.dataService.getCards().subscribe((res) => {
-
-      /*x.forEach((res) => {
-        let card: Card;
-        card = {
-          id: res.id,
-          nombre: res.nombre,
-          descipcion: res.descipcion,
-          poder: res.poder,
-          caracteristica: res.caracteristica,
-          imagen: res.imagen,
-        };
-        this.cards.push(card);
-      });
-      //this.obtenerCartasJugador();
-    });*/
     this.cards = res;
-    console.log('Lista : ' , this.cards);
-    
     });
   }
 
@@ -94,24 +76,6 @@ export class TableroComponent implements OnInit {
           this.obtener(elem.cartaId)
         })
       });
-    
-    /*
-    this.dataService
-    .obtenerCartasJugador(
-      this.dataService.getJuegoId(),
-      this.dataService.getJugadorId()
-    ).subscribe(res => {
-
-      res[0].cartas.forEach((elem: { cartaId: string; }) => {
-
-        this.obtener(elem.cartaId)
-      })
-      //this.estadoJugador = res;
-      //this.cartaJugador = res[0].cartas;
-    });
-
-    console.log('CARTAS JUGADOR: ', this.estadoJugador);
-    */
   }
 
   obtener(idCarta: string) {
@@ -124,8 +88,6 @@ export class TableroComponent implements OnInit {
 
     const set = new Set(this.cartasJugador);
     this.cartasJugador = [...set];
-
-    console.log('cartasEcontradas', this.cartasJugador);
   }
 
   jugarCarta(idCarta: string, cartaApostada: string){
@@ -143,51 +105,12 @@ export class TableroComponent implements OnInit {
       carta: this.cartaJugadaTemp
     }
 
-    this.apuestas.push(cartaJugador);
-
-    console.log('**************ID CARTA***************')
-    console.log(idCarta)
-    console.log('************IDJUEGO*****************')
-    console.log(this.dataService.getJuegoId())
-    console.log('************JUGADOR*****************')
-    console.log(this.dataService.getJugadorId())    
+    this.apuestas.push(cartaJugador);   
 
     this.dataService.jugarcarta(this.dataService.getJuegoId(), this.dataService.getJugadorId(), idCarta ).subscribe();
     this.cartasJugador = this.cartasJugador.filter( carta => carta.id !== idCarta);
     
     this.deshabilitarApuesta = true;
-  }
-
-  conexionWebSocket(){
-    this.dataService.connectToWebSocket(this.dataService.getJuegoId()).subscribe((evento)=>{
-      if (evento.type === 'juego.GanadorDeRondaDeterminado') {
-        this.userLogged.subscribe((value) => {
-          console.log('**************************')
-          console.log(value?.email)
-          console.log('**************************')
-          console.log(evento.jugadorId.uuid)
-          console.log('**************************')
-
-          if(value?.email == evento.jugadorId.uuid){
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Exitoso',
-              detail: 'Ganador de la ronda',
-            });
-          }else{
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Ronda Perdida',
-              detail: 'Siguiente Partida Preparate',
-            });
-          }
-        });
-
-        this.obtenerCartasJugador();
-        this.state = !this.state;
-      }
-      console.log(evento);
-    })
   }
 
   establecerGanadorRonda(jugadorId: string){
@@ -248,8 +171,8 @@ export class TableroComponent implements OnInit {
   }
 
   empate(event: any){
-    event.jugadorIds.forEach( (id: string) => {
-      if(id === this.dataService.getJugadorId()){
+    event.jugadorIds.forEach( (id: { uuid: string; }) => {
+      if(id.uuid === this.dataService.getJugadorId()){
         this.deshabilitarApuesta = false;
       } else {
         this.deshabilitarApuesta = true;
@@ -258,12 +181,12 @@ export class TableroComponent implements OnInit {
       this.messageService.add({
         severity: 'warning',
         summary: 'Empate',
-        detail: 'Jugador ' + id + ' empatado',
+        detail: 'Jugador ' + id.uuid + ' empatado',
       });
     });
   }
 
-  conexionWebSocket2(){
+  conexionWebSocket(){
     this.dataService.connectToWebSocket(this.dataService.getJuegoId()).subscribe((event)=>{
       switch(event.type){
         case 'juego.TableroCreado': {
@@ -281,7 +204,6 @@ export class TableroComponent implements OnInit {
         }
 
         case 'juego.CartaJugada': {
-          //this.quitarCartaAlAzar(event);
           this.cartaJugada = this.cartaEscondida;
           break;
         }
@@ -314,7 +236,6 @@ export class TableroComponent implements OnInit {
 
         case 'juego.CartasApostadasMostradas': {
           this.mostrarCarta();
-          //this.cartaJugada = this.cartaJugadaTemp;
           break;
         }
 
@@ -332,6 +253,10 @@ export class TableroComponent implements OnInit {
         case 'juego.GanadorDeJuegoDeterminado': {
           this.establecerGanadorJuego(event.ganador.entityId.uuid);
           this.obtenerCartasJugador();
+          setTimeout(() => {
+            localStorage.setItem('juegoId', event.aggregateRootId);
+            this.router.navigate(['history']);
+          }, 3000);
           break;
         }
 

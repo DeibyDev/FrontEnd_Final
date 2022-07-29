@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { sala } from '../model/informacionSala';
 import { salaget } from '../model/sala';
 import { JugadorCards } from '../interfaces/jugador-cards';
+import { EstadoJuego } from '../interfaces/estado-juego';
 
 @Injectable({
   providedIn: 'root',
@@ -66,8 +67,6 @@ export class DataService {
     return webSocketSubject.asObservable();
   }
 
-  // TODO: Nuevo
-
   private url: string = 'http://localhost:8081/api/v1/juego/';
 
   crearjuego(id: juego): Observable<any> {
@@ -82,9 +81,9 @@ export class DataService {
     return this.http.get<any>(direction);
   }
 
-  getInformacionSala(id: string): Observable<any> {
+  getInformacionSala(id: string) {
     let direction = this.url;
-    return this.http.get(`http://localhost:8081/api/v1/juego/${id}`);
+    return this.http.get<EstadoJuego>(`http://localhost:8081/api/v1/juego/${id}`);
   }
 
   getIniciarJuego(id: string): Observable<any> {
@@ -120,14 +119,6 @@ export class DataService {
   saveQuestion(question: salaget): Observable<any> {
     let direction = 'http://localhost:8081/api/v1/juego/' + 'agregarjugador';
 
-
-    console.log('*******Save Question******');
-    console.log(question);
-    console.log('*******Save Question******');
-    console.log();
-    console.log('*******Save direction******');
-    console.log(direction);
-    console.log('*******Save direction******');
     return this.http.post<any>(direction, {'juegoId':question.juegoId,
     'jugadorId':question.jugadorId,
     'alias':question.alias}, {
@@ -147,7 +138,5 @@ export class DataService {
     return this.http.post<any>(direction, parametros);
 
   }
-
-
 
 }
