@@ -103,13 +103,14 @@ export class DataService {
     return this.http.post<JugadorCards[]>(direction, parametros);
   }
 
-  agregarJugadorSala(juegoId: string ,jugadorId:string,alias:string): Observable<any>{
+  agregarJugadorSala(juegoId: string, jugadorId:string, alias:string): Observable<any>{
 
     let parametros={
       'juegoId':juegoId,
       'jugadorId':jugadorId,
       'alias':alias
     };
+    
     let direction = this.url + 'agregarjugador';
 
     return this.http.post<any>(direction, parametros);

@@ -103,6 +103,11 @@ export class SalajugadorComponent implements OnInit {
     this.router.navigate(['tablero']);
   }
 
+  crearBot(){
+    var randomEmail = require('random-email');
+    this.dataService.agregarJugadorSala(this.juegoId, randomEmail(), 'Automático').subscribe();
+  }
+
   conexionWebSocket(){
       
     this.dataService.connectToWebSocket(this.juegoId).subscribe((evento)=>{

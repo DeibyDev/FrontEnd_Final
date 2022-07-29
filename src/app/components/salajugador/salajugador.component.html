@@ -28,7 +28,10 @@
                     Footer
                 </ng-template>
             </p-table>
+
             <br>
+
+            <button pButton pRipple style="margin-right: 1%;" *ngIf="jugadores.length <= 6" type="button"  label="Agregar Bot"  (click)="crearBot()" class="p-button-raised p-button-primary"></button>
             <button pButton pRipple *ngIf="habilitarJuego" type="button"  label="Iniciar Juego"  (click)="iniciarJuego()" class="p-button-raised p-button-success"></button>
            
         </div>

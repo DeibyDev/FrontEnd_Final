@@ -39,7 +39,18 @@ export class HistoryComponent implements OnInit {
   consultarEstadoDeJuego(idJuego: string){
    this.dataService.getInformacionSala(idJuego).subscribe( res => {
     this.estadoJuego = res;
-    this.jugadores = res.jugadores;
+    res.jugadores.forEach( jugador => {
+      let jugadorSimple: JugadorSimple;
+      jugadorSimple = {
+        jugadorId: jugador.jugadorId,
+        alias: jugador.alias,
+        puntaje: jugador.puntaje
+      }
+
+      this.jugadores.push(jugadorSimple);
+
+    });
+    
     console.log('RESPUESTA', res);
     
    });
