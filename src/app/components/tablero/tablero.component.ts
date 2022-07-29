@@ -28,6 +28,8 @@ export class TableroComponent implements OnInit {
   deshabilitarApuesta: boolean = false;
 
   apuestas: CartaJugador[] = [];
+  apuestasTemp: CartaJugador[] = [];
+  apuestaEscondida: CartaJugador[] = [];
 
   estadoJugador: JugadorCards[] = [{
     jugadorId: '',
@@ -102,7 +104,14 @@ export class TableroComponent implements OnInit {
       if(carta.imagen === this.cartaJugadaTemp){
         poder = carta.poder;
       }
-    });
+    }); // '/assets/carta-volteada.png'
+
+    let cartaJugadorE: CartaJugador;
+    cartaJugadorE = {
+      jugadorId: this.dataService.getJugadorId(),
+      carta: '/assets/carta-volteada.png',
+      poder: 0
+    }
 
     let cartaJugador: CartaJugador;
     cartaJugador = {
@@ -111,7 +120,12 @@ export class TableroComponent implements OnInit {
       poder: poder
     }
 
-    this.apuestas.push(cartaJugador);   
+    this.apuestas.push(cartaJugador);
+    this.apuestaEscondida.push(cartaJugadorE);
+
+    this.apuestasTemp = this.apuestas;
+
+    this.apuestas = this.apuestaEscondida;
 
     this.dataService.jugarcarta(this.dataService.getJuegoId(), this.dataService.getJugadorId(), idCarta ).subscribe();
     this.cartasJugador = this.cartasJugador.filter( carta => carta.id !== idCarta);
@@ -211,12 +225,14 @@ export class TableroComponent implements OnInit {
 
         case 'juego.CartaJugada': {
           this.cartaJugada = this.cartaEscondida;
+          this.apuestas = this.apuestaEscondida;
           break;
         }
 
         case 'juego.CartaAgregadaAlTablero': {
           this.quitarCartaAlAzar(event);
           this.cartaJugada = this.cartaEscondida;
+          this.apuestas = this.apuestaEscondida;
           break;
         }
 
@@ -242,6 +258,7 @@ export class TableroComponent implements OnInit {
 
         case 'juego.CartasApostadasMostradas': {
           this.mostrarCarta();
+          this.apuestas = this.apuestasTemp;
           break;
         }
 
