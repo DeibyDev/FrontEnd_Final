@@ -1,4 +1,5 @@
 export interface CartaJugador{
     jugadorId:string,
-    carta: string
+    carta: string,
+    poder: number
 }

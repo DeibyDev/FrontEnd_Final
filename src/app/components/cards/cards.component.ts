@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from 'src/app/interfaces/card';
+import { ICard } from 'src/app/interfaces/card';
 import { CardCarousel } from 'src/app/interfaces/card-carousel';
 import { DataService } from 'src/app/services/data.service';
 
@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class CardsComponent implements OnInit {
 
-  cards: Array<Card> = [];
+  cards: Array<ICard> = [];
 
   constructor(private dataService: DataService) { }
 
@@ -23,7 +23,7 @@ export class CardsComponent implements OnInit {
       console.log('resultado', x);
 
       x.forEach( res => {
-        let card: Card;
+        let card: ICard;
         card = {
           id: res.id,
           nombre: res.nombre,

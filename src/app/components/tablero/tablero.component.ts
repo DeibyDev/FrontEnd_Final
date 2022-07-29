@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { Card } from 'src/app/interfaces/card';
+import { ICard } from 'src/app/interfaces/card';
 import { MessageService, Message } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 import { find } from 'rxjs';
@@ -9,6 +9,7 @@ import { salaget } from 'src/app/model/sala';
 import { JugadorCards } from 'src/app/interfaces/jugador-cards';
 import { CardSimple } from 'src/app/interfaces/card-simple';
 import { CartaJugador } from 'src/app/interfaces/carta-jugador';
+import { Card } from 'primeng/card';
 
 @Component({
   selector: 'app-tablero',
@@ -21,8 +22,8 @@ export class TableroComponent implements OnInit {
 
   constructor(private dataService: DataService, private router: Router,private messageService: MessageService,private authService: AuthService,) {}
 
-  cards: Array<Card> = [];
-  cartasJugador: Array<Card> = [];
+  cards: Array<ICard> = [];
+  cartasJugador: Array<ICard> = [];
   cartaPorJugador : Array<any> = [];
   cartaJugada: string = '';
   cartaJugadaTemp: string = '';
@@ -99,10 +100,19 @@ export class TableroComponent implements OnInit {
       }
     });
 
+    let poder: number = 0;
+
+    this.cards.filter(carta => {
+      if(carta.imagen === this.cartaJugadaTemp){
+        poder = carta.poder;
+      }
+    });
+
     let cartaJugador: CartaJugador;
     cartaJugador = {
       jugadorId: this.dataService.getJugadorId(),
-      carta: this.cartaJugadaTemp
+      carta: this.cartaJugadaTemp,
+      poder: poder
     }
 
     this.apuestas.push(cartaJugador);   
@@ -153,7 +163,7 @@ export class TableroComponent implements OnInit {
 
   quitarCartaAlAzar(event: any){
     let idCarta = event.carta.entityId.uuid;
-    let carta : Card = this.cards.filter(carta => carta.id === idCarta)[0];
+    let carta : ICard = this.cards.filter(carta => carta.id === idCarta)[0];
 
     let cartaApostada = carta.imagen;
 

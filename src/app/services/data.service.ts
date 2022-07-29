@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { Card } from '../interfaces/card';
+import { ICard } from '../interfaces/card';
 import { juego } from '../model/juego';
 import { Observable } from 'rxjs';
 import { sala } from '../model/informacionSala';
@@ -56,7 +56,7 @@ export class DataService {
   } //https://cargames.herokuapp.com
 
   getCards() {
-    return this.http.get<Card[]>('http://localhost:8081/api/v1/carta');
+    return this.http.get<ICard[]>('http://localhost:8081/api/v1/carta');
     // return this.http.get<Card[]>('/api/v1/carta');
   }
 

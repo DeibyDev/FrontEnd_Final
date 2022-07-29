@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card } from 'src/app/interfaces/card';
+import { ICard } from 'src/app/interfaces/card';
 import { CardCarousel } from 'src/app/interfaces/card-carousel';
 import { DataService } from 'src/app/services/data.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,8 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CarouselComponent implements OnInit {
   userLogged = this.authService.getUserLogged();
-  cards: Array<Card> = [];
-  cardsCarousel: Array<Card> = [];
+  cards: Array<ICard> = [];
+  cardsCarousel: Array<ICard> = [];
   displayPosition: boolean = false;
   position: string = '';
   responsiveOptions;
